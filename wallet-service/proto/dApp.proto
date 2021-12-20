@@ -1,0 +1,22 @@
+syntax = "proto3";
+package protoeth;
+option go_package = ".;proto";
+
+message CallRequest {
+    uint32 networkid = 1;
+    string fn = 2;
+    string params = 3;
+    string abi = 4;
+    string address = 5;
+    string fromAddress = 6; // python will not allow .from so it has to be fromAddress
+    uint64 value = 7;
+    uint64 gasSupply = 8;
+}
+
+message CallResponse {
+    string result = 1;
+}
+
+service ProtoEthService {
+    rpc ContractCall (CallRequest) returns (CallResponse) {};
+}
